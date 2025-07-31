@@ -24,6 +24,6 @@ func main() {
 			"date":    "2025-07-31",
 		},
 	)
-	uuidList := utils.GenerateMultipleUUIDs(Cli.Number, Cli.NoHyphons)
+	uuidList := utils.GenerateMultipleUUIDs(Cli.Number, Cli.NoHyphens)
 	utils.PrintUUIDs(uuidList)
 }
