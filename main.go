@@ -1,12 +1,16 @@
 package main
 
-import "github.com/alecthomas/kong"
+import (
+	"github.com/alecthomas/kong"
+	"github.com/kynmh69/go-uuidv7/utils"
+)
+
 var Cli struct {
-	Number int `name:"number" short:"n" default:"1" help:"Number of UUIDs to generate."`
-	NoHyphons bool `name:"no-hyphens" short:"H" help:"Do not include hyphens in the UUID."`
+	Number    int  `name:"number" short:"n" default:"1" help:"Number of UUIDs to generate."`
+	NoHyphons bool `name:"no-hyphens" short:"H" default:"false" help:"Do not include hyphens in the UUID."`
 }
 
-func main()  {
+func main() {
 	kong.Parse(&Cli,
 		kong.Name("go-uuidv7"),
 		kong.Description("Generate UUIDv7 (draft)"),
@@ -16,9 +20,10 @@ func main()  {
 			Summary: true,
 		}),
 		kong.Vars{
-			"version": "0.1.0",
-			"commit":  "unknown",
-			"date":    "unknown",
+			"version": "1.0.0",
+			"date":    "2025-07-31",
 		},
-	)	
+	)
+	uuidList := utils.GenerateMultipleUUIDs(Cli.Number, Cli.NoHyphons)
+	utils.PrintUUIDs(uuidList)
 }

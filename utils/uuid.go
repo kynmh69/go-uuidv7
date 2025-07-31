@@ -18,3 +18,15 @@ func GenerateUUIDv7(noHyphens bool) string {
 	}
 	return uuid.String()
 }
+
+// 複数のUUIDを生成するための関数
+func GenerateMultipleUUIDs(count int, noHyphens bool) []string {
+	if count <= 0 {
+		return []string{}
+	}
+	uuidList := make([]string, count)
+	for i := 0; i < count; i++ {
+		uuidList[i] = GenerateUUIDv7(noHyphens)
+	}
+	return uuidList
+}
