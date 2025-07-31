@@ -376,7 +376,9 @@ func TestPrintUUIDs(t *testing.T) {
 			PrintUUIDs(tt.uuids)
 
 			// 出力をリストア
-			w.Close()
+			if err := w.Close(); err != nil {
+				t.Errorf("Failed to close writer: %v", err)
+			}
 			os.Stdout = old
 
 			// 出力を読み取り
@@ -411,7 +413,9 @@ func TestPrintUUIDs_WithRealUUIDs(t *testing.T) {
 	PrintUUIDs(uuids)
 
 	// 出力をリストア
-	w.Close()
+	if err := w.Close(); err != nil {
+		t.Errorf("Failed to close writer: %v", err)
+	}
 	os.Stdout = old
 
 	// 出力を読み取り

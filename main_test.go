@@ -15,7 +15,11 @@ func TestMainCommand(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to build binary: %v", err)
 	}
-	defer os.Remove("test-binary")
+	defer func() {
+		if err := os.Remove("test-binary"); err != nil {
+			t.Logf("Failed to remove test binary: %v", err)
+		}
+	}()
 
 	tests := []struct {
 		name          string
@@ -112,7 +116,11 @@ func TestMainHelp(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to build binary: %v", err)
 	}
-	defer os.Remove("test-binary")
+	defer func() {
+		if err := os.Remove("test-binary"); err != nil {
+			t.Logf("Failed to remove test binary: %v", err)
+		}
+	}()
 
 	// ヘルプメッセージのテスト
 	cmd = exec.Command("./test-binary", "--help")
@@ -145,7 +153,11 @@ func TestMainLargeNumber(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to build binary: %v", err)
 	}
-	defer os.Remove("test-binary")
+	defer func() {
+		if err := os.Remove("test-binary"); err != nil {
+			t.Logf("Failed to remove test binary: %v", err)
+		}
+	}()
 
 	// 大きな数でのテスト
 	largeNum := 100
